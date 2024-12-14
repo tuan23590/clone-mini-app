@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color: var(--foreground);
+}
+:root {
+  --primary: #3459a7;
+  --secondary: #ebedef;
+  --background: #ffffff;
+  --foreground: #0d0d0d;
+  --section: #f7f7f8;
+  --inactive: #a9adb2;
+  --tabIndicator: #212121;
+  --subtitle: #6f7071;
+  --danger: #f50000;
+  --skeleton: #ebedef;
+}
