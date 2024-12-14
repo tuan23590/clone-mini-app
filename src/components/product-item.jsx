@@ -1,10 +1,10 @@
 import { useState } from "preact/hooks";
 import TransitionLink from "./transition-link";
 import { formatPrice } from "../utils/format";
+import styled from "styled-components";
 
 export default function ProductItem(props) {
     const [selected, setSelected] = useState(false);
-    console.log("props.product", props);
     return (
       <TransitionLink
         className="flex flex-col cursor-pointer group"
@@ -14,16 +14,13 @@ export default function ProductItem(props) {
       >
         {({ isTransitioning }) => (
           <>
-            <img
-              src={props.product.image}
+            <ImageWrapper
               className="w-full aspect-square object-cover rounded-t-lg"
-              style={{
-                viewTransitionName:
-                  isTransitioning && selected // only animate the "clicked" product item in related products list
-                    ? `product-image-${props.product.id}`
-                    : undefined,
-              }}
+              src={props.product.image}
               alt={props.product?.name}
+              isTransitioning={isTransitioning}
+              selected={selected}
+              productId={props.product.id}
             />
             <div className="py-2">
               <div className="text-3xs text-subtitle truncate">
@@ -42,3 +39,10 @@ export default function ProductItem(props) {
       </TransitionLink>
     );
   }
+  // chờ ngày quay lại phục thù
+  const ImageWrapper = styled.img`
+  ${({ isTransitioning, selected, productId }) =>
+    isTransitioning && selected
+      ? `view-transition-name: product-image-${productId};`
+      : ''}
+`;

@@ -43,6 +43,7 @@ export default function Footer() {
       <HorizontalDivider />
       <NavWrapper
         style={{
+          // chờ ngày quay lại phục thù
           gridTemplateColumns: `repeat(${NAV_ITEMS.length}, 1fr)`,
           paddingBottom: `max(16px, env(safe-area-inset-bottom)`,
         }}
@@ -60,6 +61,7 @@ export default function Footer() {
                   </div>
                   <div className={`text ${isActive ? "text-primary" : ""}`}
                   style={{
+                    // chờ ngày quay lại phục thù
                     color: isActive ? "var(--primary)" : "",
                   }}
                   >

@@ -1,11 +1,10 @@
+import styled from "styled-components"
 
 export default function Tabs(props) {
   return (
-    <div
+    <Wrapper
+      itemsLength={props.items.length}
       className="grid h-11 border-b-[0.5px] border-black/10"
-      style={{
-        gridTemplateColumns: `repeat(${props.items.length}, minmax(0, 1fr))`,
-      }}
     >
       {props.items.map((item, i) => (
         <div
@@ -27,6 +26,10 @@ export default function Tabs(props) {
           )}
         </div>
       ))}
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+grid-template-columns: ${(props) => `repeat(${props.itemsLength}, minmax(0, 1fr))`};
+`

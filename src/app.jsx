@@ -5,6 +5,7 @@ import categoriesData from "./mock/categories.json";
 import productsData from "./mock/products.json";
 import bannersData from "./mock/banners.json";
 import { useStore } from "./store";
+import { produce } from "immer";
 function App() {
   const [_, setCategories] = useStore.categories();
   const [__, setProducts] = useStore.products();
@@ -13,7 +14,17 @@ function App() {
   useEffect(() => {
     setLoading(true);
     setCategories(categoriesData);
-    setProducts(productsData);
+
+    const listProductsWithCategory = produce(productsData, (draft) => {
+      draft.forEach(product => {
+        const category = categoriesData.find(category => category.id === product.categoryId);
+        product.category = category;
+      });
+    });
+
+    console.log(listProductsWithCategory);
+
+    setProducts(listProductsWithCategory);
     setBanners(bannersData);
     setLoading(false);
   }, []);

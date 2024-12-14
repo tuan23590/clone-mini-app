@@ -57,10 +57,11 @@ export default function Carousel(props) {
 
       <ListDot>
         {scrollSnaps.map((_, index) => (
-          <button
+          <Button
             key={index}
             onClick={() => onDotButtonClick(index)}
             style={{
+              // chờ ngày quay lại phục thù
               backgroundColor:
                 index === selectedIndex && !props.disabled
                   ? "var(--primary)"
@@ -104,3 +105,7 @@ const ListDot = styled.div`
     background-color: rgb(0 0 0 / 0.1);
   }
 `;
+
+const Button = styled.button`
+
+`

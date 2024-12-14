@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import HorizontalDivider from "../../components/horizontal-divider";
 import Banners from "./banners";
 import SearchBar from "../../components/search-bar";
@@ -12,36 +11,18 @@ export default function HomePage() {
   const navigate = useNavigate();
   return (
     <>
-    <Wrapper>
-      <div className="search-bar-and-banners">
+   <div className="min-h-full bg-section">
+      <div className="bg-background pt-2">
         <SearchBar onClick={() => navigate("/search")} />
         <Banners />
       </div>
-      <div className="category-and-tabs">
+      <div className="bg-background space-y-2 mt-2">
         <CategoryTabs />
         <Category />
       </div>
       <HorizontalDivider />
       <FlashSales />
-    </Wrapper>
+    </div>
     </>
   );
 }
-
-const Wrapper = styled.div`
-  min-height: 100%;
-  background-color: var(--section);
-  .search-bar-and-banners {
-    background-color: var(--background);
-    padding-top: 0.5rem;
-  }
-  .category-and-tabs {
-    background-color: var(--background);
-    margin-top: 0.5rem;
-    :not([hidden]) ~ :not([hidden]) {
-      --tw-space-y-reverse: 0;
-      margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-      margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-    }
-  }
-`;
