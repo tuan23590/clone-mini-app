@@ -2,6 +2,8 @@ import { useMatches } from "react-router-dom";
 import { useStore } from "../store";
 import { getDefaultOptions, isIdentical } from "./cart";
 import { useLayoutEffect, useMemo, useState } from "preact/hooks";
+import toast from "react-hot-toast";
+import { purchase } from "zmp-sdk";
 
 export function useRouteHandle() {
   const matches = useMatches();
@@ -109,4 +111,41 @@ export function useRealHeight(element, defaultValue) {
   }
 
   return height;
+}
+
+export function useToBeImplemented() {
+  return () =>
+    toast("Chức năng dành cho các bên tích hợp phát triển...", {
+      icon: "🛠️",
+    });
+}
+
+export function useCustomerSupport() {
+  return () =>
+    toast("Chức năng hỗ trợ khách hàng đang được phát triển...", {
+      icon: "🛠️",
+    });
+}
+
+export function useCheckout() {
+  const [totalAmount, _] = useStore.totalAmount();
+  const [__, setCart] = useStore.cart();
+  return async () => {
+    try {
+      await purchase({
+        amount: totalAmount,
+        desc: "Thanh toán đơn hàng",
+        method: "",
+      });
+      toast.success("Thanh toán thành công. Cảm ơn bạn đã mua hàng!", {
+        icon: "🎉",
+      });
+      setCart([]);
+    } catch (error) {
+      toast.error(
+        "Thanh toán thất bại. Vui lòng kiểm tra nội dung lỗi bên trong Console."
+      );
+      console.warn(error);
+    }
+  };
 }

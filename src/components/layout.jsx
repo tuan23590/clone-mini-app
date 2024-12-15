@@ -1,10 +1,11 @@
 import React from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./header";
 import { Suspense } from "preact/compat";
 import Footer from "./footer";
 import { Toaster } from "react-hot-toast";
+import { ScrollRestoration } from "./scroll-restoration";
 
 export default function Layout() {
   return (

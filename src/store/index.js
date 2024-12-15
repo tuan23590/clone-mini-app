@@ -6,4 +6,7 @@ export const { useStore } = createStore({
     banner: [],
     cart: [],
     tabs: ["Tất cả", "Nam", "Nữ", "Trẻ em"],
+    selectedItemIds: [],
+    totalItems: 0,
+    totalAmount: 0,
 });

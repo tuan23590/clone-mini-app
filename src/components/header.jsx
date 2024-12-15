@@ -11,6 +11,7 @@ export default function Header() {
   const [handle, match] = useRouteHandle();
   const navigate = useNavigate();
   const location = useLocation();
+
   const title = useMemo(() => {
     if (handle) {
       if (typeof handle.title === "function") {

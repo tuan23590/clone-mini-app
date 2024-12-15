@@ -23,7 +23,9 @@ const NAV_ITEMS = [
       return (
         <BadgeWrapper>
           {cart.length > 0 && (
-            <div className="badge">{cart.length > 9 ? "9+" : cart.length}</div>
+            <div className="absolute top-0 left-[18px] h-4 px-1.5 pt-[1.5px] pb-[0.5px] rounded-full bg-[#FF3333] text-white text-[10px] leading-[14px] font-medium shadow-[0_0_0_2px_white]">
+            {cart.length > 9 ? "9+" : cart.length}
+          </div>
           )}
           <CartIcon {...props} />
         </BadgeWrapper>
@@ -78,23 +80,6 @@ export default function Footer() {
 
 const BadgeWrapper = styled.div`
   position: relative;
-  .badge {
-    position: absolute;
-    top: 0;
-    left: 18px;
-    height: 1rem;
-    padding-left: 0.375rem;
-    padding-right: 0.375rem;
-    padding-top: 0.375rem;
-    padding-bottom: 0.125rem;
-    border-radius: 9999px;
-    background-color: #ff3333;
-    color: white;
-    font-size: 10px;
-    line-height: 14px;
-    font-weight: 500;
-    box-shadow: 0 0 0 2px white;
-  }
 `;
 
 const NavWrapper = styled.div`

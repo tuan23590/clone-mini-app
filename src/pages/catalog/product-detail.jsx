@@ -9,6 +9,7 @@ import HorizontalDivider from "../../components/horizontal-divider";
 import Collapse from "../../components/collapse";
 import RelatedProducts from "./related-products";
 import Button from "../../components/button";
+import toast from "react-hot-toast";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
