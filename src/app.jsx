@@ -21,9 +21,7 @@ function App() {
         product.category = category;
       });
     });
-
-    console.log(listProductsWithCategory);
-
+    
     setProducts(listProductsWithCategory);
     setBanners(bannersData);
     setLoading(false);

@@ -5,6 +5,7 @@ import CategoryListPage from "./pages/catalog";
 import CartPage from "./pages/cart";
 import ProfilePage from "./pages/profile";
 import SearchPage from "./pages/search";
+import ProductDetailPage from "./pages/catalog/product-detail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,13 @@ const router = createBrowserRouter([
         element: <SearchPage />,
         handle: {
           title: "Tìm kiếm",
+        },
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetailPage />,
+        handle: {
+          scrollRestoration: 0, // when user selects another product in related products, scroll to the top of the page
         },
       },
     ],

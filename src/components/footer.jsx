@@ -20,7 +20,6 @@ const NAV_ITEMS = [
     path: "/cart",
     icon: (props) => {
       const [cart, _] = useStore.cart();
-      console.log(cart);
       return (
         <BadgeWrapper>
           {cart.length > 0 && (

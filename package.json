@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
     "embla-carousel-autoplay": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
     "immer": "^10.1.1",
@@ -17,7 +18,8 @@
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^7.0.2",
     "styled-components": "^6.1.13",
-    "teaful": "^0.11.1"
+    "teaful": "^0.11.1",
+    "zmp-sdk": "^2.44.0-19"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.9.1",
