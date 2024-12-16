@@ -2,8 +2,6 @@ import React from 'react'
 import Section from '../../components/section'
 import ProductGrid from '../../components/product-grid'
 import { useStore } from '../../store'
-import { produce } from 'immer'
-
 
 export default function FlashSales() {
     const [products,_] = useStore.products()

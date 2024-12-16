@@ -39,7 +39,8 @@ export default function ProductItem(props) {
       </TransitionLink>
     );
   }
-  // chờ ngày quay lại phục thù
+
+  
   const ImageWrapper = styled.img`
   ${({ isTransitioning, selected, productId }) =>
     isTransitioning && selected

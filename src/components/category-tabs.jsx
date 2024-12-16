@@ -7,7 +7,7 @@ export default function CategoryTabs() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <Tabs
-      items={["Tất cả", "Nam", "Nữ", "Trẻ em"]}
+      items={tabs}
       value={tabs[selectedIndex]}
       onChange={(tab) => setSelectedIndex(tabs.indexOf(tab))}
       renderLabel={(item) => item}

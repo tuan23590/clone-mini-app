@@ -15,6 +15,10 @@ export default function SelectAll() {
     setSelectedItemIds([]);
   };
 
+  const onRemove = () => {
+    setCart(cart.filter((item) => !selectedItemIds.includes(item.id)));
+    setSelectedItemIds([]);
+  };
   return (
     <div className="px-4 py-3 flex items-center space-x-4">
       <Checkbox
@@ -23,13 +27,7 @@ export default function SelectAll() {
       />
       <div className="text-sm font-medium flex-1">Tất cả</div>
       {selectedItemIds.length > 0 && (
-        <RemoveIcon
-          className="cursor-pointer"
-          onClick={() => {
-            setCart(cart.filter((item) => !selectedItemIds.includes(item.id)));
-            setSelectedItemIds([]);
-          }}
-        />
+        <RemoveIcon className="cursor-pointer" onClick={onRemove} />
       )}
     </div>
   );

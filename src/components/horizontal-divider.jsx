@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function HorizontalDivider() {
-  return <Wrapper></Wrapper>;
+  return <Wrapper/>;
 }
 
 const Wrapper = styled.div`

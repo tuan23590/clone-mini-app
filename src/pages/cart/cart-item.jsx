@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { useAddToCart } from "../../utils/hook";
 import { useStore } from "../../store";
-import { useSpring,animated } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import { RemoveIcon } from "../../components/vectors";
 import Checkbox from "../../components/checkbox";
@@ -54,67 +54,71 @@ export default function CartItem(props) {
     }
   );
 
-  return  <div className="relative">
-  <div className="absolute right-0 top-0 bottom-0 w-20 border-t-[0.5px] border-b-[0.5px] border-black/10">
-    <div
-      className="bg-danger text-white/95 w-full h-full flex flex-col space-y-1 justify-center items-center cursor-pointer"
-      onClick={() => addToCart(0)}
-    >
-      <RemoveIcon />
-      <div className="text-2xs font-medium">Xoá</div>
-    </div>
-  </div>
+  const onCheckBoxChange = (checked) => {
+    if (checked) {
+      setSelectedItemIds([...selectedItemIds, props.id]);
+    } else {
+      setSelectedItemIds(selectedItemIds.filter((id) => id !== props.id));
+    }
+  };
 
-  <animated.div
-    {...bind()}
-    style={{ x }}
-    className="bg-white pl-4 flex items-center space-x-4 relative"
-  >
-    <Checkbox
-      checked={selectedItemIds.includes(props.id)}
-      onChange={(checked) => {
-        if (checked) {
-          setSelectedItemIds([...selectedItemIds, props.id]);
-        } else {
-          setSelectedItemIds(
-            selectedItemIds.filter((id) => id !== props.id)
-          );
-        }
-      }}
-    />
-    <img src={props.product.image} className="w-14 h-14 rounded-lg" />
-    <div className="py-4 pr-4 flex-1 border-b-[0.5px] border-black/10">
-      <div className="text-sm">{props.product.name}</div>
-      {displayOptions && (
-        <div className="text-xs text-subtitle mt-0.5">{displayOptions}</div>
-      )}
-      <div className="flex items-center py-2 space-x-2">
-        <div className="flex-1 flex flex-wrap items-center space-x-0.5">
-          <div className="text-xs font-medium text-primary">
-            {formatPrice(props.product.price)}
-          </div>
-          {props.product.originalPrice && (
-            <div className="line-through text-subtitle text-3xs">
-              {formatPrice(props.product.originalPrice)}
-            </div>
-          )}
+  const onQuantityInputChange = (value) => {
+    if (value <= 0) {
+      setQuantity(1);
+      api.start({ x: -SWIPE_TO_DELTE_OFFSET });
+    } else {
+      setQuantity(value);
+      if (value > quantity) {
+        api.start({ x: 0 });
+      }
+    }
+  };
+
+  return (
+    <div className="relative">
+      <div className="absolute right-0 top-0 bottom-0 w-20 border-t-[0.5px] border-b-[0.5px] border-black/10">
+        <div
+          className="bg-danger text-white/95 w-full h-full flex flex-col space-y-1 justify-center items-center cursor-pointer"
+          onClick={() => addToCart(0)}
+        >
+          <RemoveIcon />
+          <div className="text-2xs font-medium">Xoá</div>
         </div>
-        <QuantityInput
-          value={quantity}
-          onChange={(value) => {
-            if (value <= 0) {
-              setQuantity(1);
-              api.start({ x: -SWIPE_TO_DELTE_OFFSET });
-            } else {
-              setQuantity(value);
-              if (value > quantity) {
-                api.start({ x: 0 });
-              }
-            }
-          }}
-        />
       </div>
+
+      <animated.div
+        {...bind()}
+        style={{ x }}
+        className="bg-white pl-4 flex items-center space-x-4 relative"
+      >
+        <Checkbox
+          checked={selectedItemIds.includes(props.id)}
+          onChange={onCheckBoxChange}
+        />
+        <img src={props.product.image} className="w-14 h-14 rounded-lg" />
+        <div className="py-4 pr-4 flex-1 border-b-[0.5px] border-black/10">
+          <div className="text-sm">{props.product.name}</div>
+          {displayOptions && (
+            <div className="text-xs text-subtitle mt-0.5">{displayOptions}</div>
+          )}
+          <div className="flex items-center py-2 space-x-2">
+            <div className="flex-1 flex flex-wrap items-center space-x-0.5">
+              <div className="text-xs font-medium text-primary">
+                {formatPrice(props.product.price)}
+              </div>
+              {props.product.originalPrice && (
+                <div className="line-through text-subtitle text-3xs">
+                  {formatPrice(props.product.originalPrice)}
+                </div>
+              )}
+            </div>
+            <QuantityInput
+              value={quantity}
+              onChange={onQuantityInputChange}
+            />
+          </div>
+        </div>
+      </animated.div>
     </div>
-  </animated.div>
-</div>;
+  );
 }

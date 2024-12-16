@@ -10,6 +10,7 @@ import Collapse from "../../components/collapse";
 import RelatedProducts from "./related-products";
 import Button from "../../components/button";
 import toast from "react-hot-toast";
+import styled from "styled-components";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -32,18 +33,26 @@ export default function ProductDetailPage() {
     });
   }, [selectedSize, selectedColor]);
 
+  const onAddToCart = () => {
+    addToCart(1);
+    toast.success("Đã thêm vào giỏ hàng");
+  };
+
+  const onBuyNow = () => {
+    addToCart(1);
+    navigate("/cart");
+  };
+
   return <div className="w-full h-full flex flex-col">
       <div className="flex-1 overflow-y-auto">
         <div className="w-full px-4">
           <div className="py-2">
-            <img
+            <ImageProduct
               key={product.id}
               src={product.image}
               alt={product.name}
+              productId={product.id}
               className="w-full h-full object-cover rounded-lg"
-              style={{
-                viewTransitionName: `product-image-${product.id}`,
-              }}
             />
           </div>
           <div className="text-xl font-medium text-primary">
@@ -115,23 +124,21 @@ export default function ProductDetailPage() {
       <div className="flex-none grid grid-cols-2 gap-2 py-3 px-4">
         <Button
           large
-          onClick={() => {
-            addToCart(1);
-            toast.success("Đã thêm vào giỏ hàng");
-          }}
+          onClick={onAddToCart}
         >
           Thêm vào giỏ
         </Button>
         <Button
           large
           primary
-          onClick={() => {
-            addToCart(1);
-            navigate("/cart");
-          }}
+          onClick={onBuyNow}
         >
           Mua ngay
         </Button>
       </div>
     </div>;
 }
+
+const ImageProduct = styled.img`
+viewTransitionName: product-image-${(props) => props.productId};
+`;

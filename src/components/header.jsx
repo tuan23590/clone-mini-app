@@ -32,10 +32,14 @@ export default function Header() {
     );
   }
 
+  const handleBack = () => {
+    navigate(-1);
+  }
+
   return (
     <WrapperBack>
       {showBack && (
-        <div className="icon" onClick={() => navigate(-1)}>
+        <div className="icon" onClick={handleBack}>
           <BackIcon />
         </div>
       )}

@@ -1,6 +1,9 @@
 
 
   export default function VariantPicker(props) {
+    const onSelected = (variant) => {
+      props.onChange(variant);
+    }
     return (
       <div className="py-4 space-y-2">
         <div className="text-base font-medium text-inactive">{props.title}</div>
@@ -9,7 +12,7 @@
             <div
               key={index}
               className="flex-none w-8 h-8 rounded-full overflow-hidden cursor-pointer"
-              onClick={() => props.onChange(variant)}
+              onClick={onSelected}
             >
               {props.renderVariant(variant, props.value === variant)}
             </div>

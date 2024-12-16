@@ -1,6 +1,9 @@
 import styled from "styled-components"
 
 export default function Tabs(props) {
+  const handleTabChange = (item) => {
+    props.onChange(item)
+  }
   return (
     <Wrapper
       itemsLength={props.items.length}
@@ -10,7 +13,7 @@ export default function Tabs(props) {
         <div
           key={i}
           className="h-full flex flex-col px-3 cursor-pointer"
-          onClick={() => props.onChange(item)}
+          onClick={() => handleTabChange(item)}
         >
           <div className="flex-1 flex items-center justify-center">
             <span

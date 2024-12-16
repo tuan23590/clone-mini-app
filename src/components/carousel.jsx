@@ -60,13 +60,7 @@ export default function Carousel(props) {
           <Button
             key={index}
             onClick={() => onDotButtonClick(index)}
-            style={{
-              // chờ ngày quay lại phục thù
-              backgroundColor:
-                index === selectedIndex && !props.disabled
-                  ? "var(--primary)"
-                  : "",
-            }}
+            isActived={index === selectedIndex && !props.disabled}
           />
         ))}
       </ListDot>
@@ -105,7 +99,6 @@ const ListDot = styled.div`
     background-color: rgb(0 0 0 / 0.1);
   }
 `;
-
 const Button = styled.button`
-
-`
+  background-color: ${(props) => (props.isActived ? "var(--primary) !important" : "")};
+`;

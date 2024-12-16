@@ -61,10 +61,6 @@ export default function Footer() {
                     <item.icon active={isActive} />
                   </div>
                   <div className={`text ${isActive ? "text-primary" : ""}`}
-                  style={{
-                    // chờ ngày quay lại phục thù
-                    color: isActive ? "var(--primary)" : "",
-                  }}
                   >
                     {item.name}
                   </div>

@@ -2,7 +2,7 @@ import { openShareSheet } from "zmp-sdk";
 import { ChevronRight, ShareDecor } from "../../components/vectors";
 
 export default function ShareButton(props) {
-  const share = () => {
+  const onShare = () => {
     openShareSheet({
       type: "zmp_deep_link",
       data: {
@@ -16,7 +16,7 @@ export default function ShareButton(props) {
   return (
     <button
       className="relative p-4 w-full flex space-x-1 bg-[#016BD9] rounded-lg text-white text-sm font-medium cursor-pointer"
-      onClick={share}
+      onClick={onShare}
     >
       <div>Chia sẻ ngay cho bạn bè</div>
       <ChevronRight />

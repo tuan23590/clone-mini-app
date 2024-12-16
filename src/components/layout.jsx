@@ -19,14 +19,18 @@ export default function Layout() {
       <Footer />
       <Toaster
         containerClassName="toast-container"
-        containerStyle={{
-          top: "calc(50% - 24px)",
-        }}
+        containerStyle={toastContainerStyle}
       />
       <ScrollRestoration />
     </Wrapper>
   );
 }
+
+const toastContainerStyle = () => {
+  return {
+    top: "calc(50% - 24px)",
+  };
+};
 
 const Wrapper = styled.div`
   width: 100vw;
