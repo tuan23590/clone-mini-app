@@ -25,7 +25,7 @@ export function PageSkeleton() {
           onChange={() => {}}
           renderLabel={(key) => (
             <div
-              key={key}
+              key={"tab-" + key}
               className="h-6 w-10 rounded-lg bg-skeleton animate-pulse"
             />
           )}
@@ -39,7 +39,7 @@ export function PageSkeleton() {
           <div className="pt-2.5 pb-4 flex space-x-6 overflow-x-auto px-4">
             {[1, 2, 3, 4].map((key) => (
               <div
-                key={key}
+                key={"category-" + key}
                 className="flex flex-col items-center space-y-2 flex-none basis-[70px] overflow-hidden cursor-pointer"
               >
                 <div className="w-[70px] h-[70px] object-cover rounded-full border-[0.5px] border-black/15 bg-skeleton animate-pulse" />
@@ -59,7 +59,7 @@ export function PageSkeleton() {
       >
         <div className="grid grid-cols-2 px-4 py-2 gap-4">
           {[1, 2, 3, 4].map((key) => (
-            <ProductItemSkeleton key={key} />
+            <ProductItemSkeleton key={"product-item-" + key} />
           ))}
         </div>
       </Section>

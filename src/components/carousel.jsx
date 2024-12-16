@@ -49,7 +49,7 @@ export default function Carousel(props) {
     <Wrapper ref={emblaRef}>
       <div className="list-slider">
         {props.slides.map((slide, i) => (
-          <div key={i} className="list-slider-item">
+          <div key={"slide-" + i} className="list-slider-item">
             {slide}
           </div>
         ))}
@@ -58,7 +58,7 @@ export default function Carousel(props) {
       <ListDot>
         {scrollSnaps.map((_, index) => (
           <Button
-            key={index}
+            key={"dot-" + index}
             onClick={() => onDotButtonClick(index)}
             isActived={index === selectedIndex && !props.disabled}
           />
@@ -100,5 +100,6 @@ const ListDot = styled.div`
   }
 `;
 const Button = styled.button`
-  background-color: ${(props) => (props.isActived ? "var(--primary) !important" : "")};
+  background-color: ${(props) =>
+    props.isActived ? "var(--primary) !important" : ""};
 `;

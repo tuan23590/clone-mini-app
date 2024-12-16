@@ -2,9 +2,8 @@ import { MinusIcon, PlusIcon } from "./vectors";
 import HorizontalDivider from "./horizontal-divider";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { useRealHeight } from "../utils/hook";
-import { useSpringValue,animated } from "@react-spring/web";
+import { useSpringValue, animated } from "@react-spring/web";
 import { Fragment } from "preact";
-
 
 function CollapseItem(props) {
   const [collapsed, setCollapsed] = useState(true);
@@ -43,8 +42,8 @@ export default function Collapse(props) {
   return (
     <div className="px-4 py-1">
       {props.items.map((item, index) => (
-        <Fragment key={index}>
-          <CollapseItem key={index} {...item} />
+        <Fragment key={"fragment-" + index}>
+          <CollapseItem key={"collapse-item-" + index} {...item} />
           {index < props.items.length - 1 && <HorizontalDivider />}
         </Fragment>
       ))}

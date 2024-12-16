@@ -1,9 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export default function Tabs(props) {
   const handleTabChange = (item) => {
-    props.onChange(item)
-  }
+    props.onChange(item);
+  };
   return (
     <Wrapper
       itemsLength={props.items.length}
@@ -11,7 +11,7 @@ export default function Tabs(props) {
     >
       {props.items.map((item, i) => (
         <div
-          key={i}
+          key={"tab-" + i}
           className="h-full flex flex-col px-3 cursor-pointer"
           onClick={() => handleTabChange(item)}
         >
@@ -30,12 +30,13 @@ export default function Tabs(props) {
         </div>
       ))}
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = styled.div`
-grid-template-columns: ${(props) => `repeat(${props.itemsLength}, minmax(0, 1fr))`};
-`
+  grid-template-columns: ${(props) =>
+    `repeat(${props.itemsLength}, minmax(0, 1fr))`};
+`;
 const TextName = styled.span`
-font-size: 16px;
-`
+  font-size: 16px;
+`;

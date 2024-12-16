@@ -10,7 +10,7 @@
         <div className="flex overflow-x-auto space-x-2">
           {props.variants.map((variant, index) => (
             <div
-              key={index}
+              key={"variant-" + index}
               className="flex-none w-8 h-8 rounded-full overflow-hidden cursor-pointer"
               onClick={onSelected}
             >
