@@ -16,13 +16,13 @@ export default function Tabs(props) {
           onClick={() => handleTabChange(item)}
         >
           <div className="flex-1 flex items-center justify-center">
-            <span
+            <TextName
               className={"truncate font-medium ".concat(
                 item === props.value ? "" : "text-inactive"
               )}
             >
               {props.renderLabel(item)}
-            </span>
+            </TextName>
           </div>
           {props.value === item && (
             <div className="bg-tabIndicator h-[1.5px] rounded-t-sm -mt-px" />
@@ -35,4 +35,7 @@ export default function Tabs(props) {
 
 const Wrapper = styled.div`
 grid-template-columns: ${(props) => `repeat(${props.itemsLength}, minmax(0, 1fr))`};
+`
+const TextName = styled.span`
+font-size: 16px;
 `
