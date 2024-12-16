@@ -6,6 +6,7 @@ import CartPage from "./pages/cart";
 import ProfilePage from "./pages/profile";
 import SearchPage from "./pages/search";
 import ProductDetailPage from "./pages/catalog/product-detail";
+import ProductListPage from "./pages/catalog/product-list";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
         handle: {
           title: "Danh mục sản phẩm",
           back: false,
+        },
+      },
+      {
+        path: "/category/:id",
+        element: <ProductListPage />,
+        handle: {
+          title: ({ categories, params }) =>
+            categories.find((c) => c.id === Number(params.id))?.name,
         },
       },
       {
