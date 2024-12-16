@@ -13,7 +13,6 @@ export default function SearchPage() {
   const inputRef = useRef(null);
   const [keyword, setKeyword] = useProductsStore.keyword();
   const [localKeyword, setLocalKeyword] = useState('');
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();

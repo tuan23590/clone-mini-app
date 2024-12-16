@@ -155,6 +155,7 @@ export function useCheckout() {
 export function useSearchResult() {
   const [products,_] = useProductsStore.products();
   const [keyword,__] = useProductsStore.keyword();
+
   if (keyword === "") {
     return [];
   }
@@ -162,5 +163,6 @@ export function useSearchResult() {
   const result = products.filter((product) =>
     product.name.toLowerCase().includes(keyword.toLowerCase())
   );
+  
   return result;
 }
