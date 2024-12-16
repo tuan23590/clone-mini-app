@@ -2,20 +2,18 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./header";
-import { Suspense } from "preact/compat";
 import Footer from "./footer";
 import { Toaster } from "react-hot-toast";
 import { ScrollRestoration } from "./scroll-restoration";
+import { PageSkeleton } from "./skeleton";
+import { useStore } from "../store";
 
 export default function Layout() {
+  const [loading, _] = useStore.loading();
   return (
     <Wrapper>
       <Header />
-      <WrapperContent>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </WrapperContent>
+      <WrapperContent>{loading ? <PageSkeleton /> : <Outlet />}</WrapperContent>
       <Footer />
       <Toaster
         containerClassName="toast-container"

@@ -10,7 +10,7 @@ function App() {
   const [_, setCategories] = useStore.categories();
   const [__, setProducts] = useStore.products();
   const [___, setBanners] = useStore.banners();
-  const [loading, setLoading] = useState(true);
+  const [____, setLoading] = useStore.loading();
   useEffect(() => {
     setLoading(true);
     setCategories(categoriesData);
@@ -26,10 +26,6 @@ function App() {
     setBanners(bannersData);
     setLoading(false);
   }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return <RouterProvider router={router} />;
 }

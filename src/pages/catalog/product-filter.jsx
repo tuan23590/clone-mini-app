@@ -1,6 +1,7 @@
 import { Suspense } from "preact/compat";
 import { useStore } from "../../store";
 import { Select } from "../../components/lazyloaded";
+import { SelectSkeleton } from "../../components/skeleton";
 
 export default function ProductFilter() {
   const [initSizes, _] = useStore.initSizes();
@@ -12,8 +13,7 @@ export default function ProductFilter() {
     <div className="flex px-4 py-3 space-x-2 overflow-x-auto">
       <Suspense
         fallback={
-          // <SelectSkeleton width={110} />
-          <div>loading...</div>
+          <SelectSkeleton width={110} />
         }
       >
         <Select
@@ -27,8 +27,7 @@ export default function ProductFilter() {
         />
       </Suspense>
       <Suspense fallback={
-        // <SelectSkeleton width={95} />
-        <div>loading...</div>
+        <SelectSkeleton width={95} />
       }>
         <Select
           items={initColors}

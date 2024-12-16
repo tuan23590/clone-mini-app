@@ -30,4 +30,5 @@ export const { useStore } = createStore({
   ],
   size: undefined,
   color: undefined,
+  loading: true,
 });
