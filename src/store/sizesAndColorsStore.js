@@ -1,14 +1,6 @@
 import createStore from "teaful";
 
-export const { useStore } = createStore({
-  products: [],
-  categories: [],
-  banner: [],
-  cart: [],
-  tabs: ["Tất cả", "Nam", "Nữ", "Trẻ em"],
-  selectedItemIds: [],
-  totalItems: 0,
-  totalAmount: 0,
+export const { useStore: useSizesAndColorsStore } = createStore({
   initSizes: ["S", "M", "L", "XL"],
   initColors: [
     {
@@ -30,5 +22,4 @@ export const { useStore } = createStore({
   ],
   size: undefined,
   color: undefined,
-  loading: true,
 });

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useStore } from "../../store";
 import SearchBar from "../../components/search-bar";
 import CategoryTabs from "../../components/category-tabs";
 import TransitionLink from "../../components/transition-link";
+import { useCategoriesStore } from "../../store/categoriesStore";
 
 export default function CategoryListPage() {
   const navigate = useNavigate();
-  const [categories,_] = useStore.categories();
+  const [categories,_] = useCategoriesStore.categories();
 
   return (
     <>

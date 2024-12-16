@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { useAddToCart } from "../../utils/hook";
-import { useStore } from "../../store";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import { RemoveIcon } from "../../components/vectors";
 import Checkbox from "../../components/checkbox";
 import { formatPrice } from "../../utils/format";
 import QuantityInput from "../../components/quantity-input";
+import { useCartStore } from "../../store/cartStore";
 
 const SWIPE_TO_DELTE_OFFSET = 80;
 
@@ -14,7 +14,7 @@ export default function CartItem(props) {
   const [quantity, setQuantity] = useState(props.quantity);
   const { addToCart } = useAddToCart(props.product, props.id);
 
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
+  const [selectedItemIds, setSelectedItemIds] = useCartStore.selectedItemIds();
 
   const displayOptions = useMemo(
     () =>

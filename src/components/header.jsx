@@ -1,13 +1,13 @@
-import { useStore } from "../store";
 import { useRouteHandle } from "../utils/hook";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "preact/hooks";
 import headerLogoImage from "../static/header-logo.svg";
 import styled from "styled-components";
 import { BackIcon } from "./vectors";
+import { useCategoriesStore } from "../store/categoriesStore";
 
 export default function Header() {
-  const [categories, _] = useStore.categories();
+  const [categories, _] = useCategoriesStore.categories();
   const [handle, match] = useRouteHandle();
   const navigate = useNavigate();
   const location = useLocation();

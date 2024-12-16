@@ -1,9 +1,10 @@
 import { useMatches } from "react-router-dom";
-import { useStore } from "../store";
 import { getDefaultOptions, isIdentical } from "./cart";
 import { useLayoutEffect, useMemo, useState } from "preact/hooks";
 import toast from "react-hot-toast";
 import { purchase } from "zmp-sdk";
+import { useCartStore } from "../store/cartStore";
+import { useProductsStore } from "../store/productsStore";
 
 export function useRouteHandle() {
   const matches = useMatches();
@@ -13,7 +14,7 @@ export function useRouteHandle() {
 }
 
 export function useAddToCart(product, editingCartItemId) {
-  const [cart, setCart] = useStore.cart();
+  const [cart, setCart] = useCartStore.cart();
   const editing = useMemo(
     () => cart.find((item) => item.id === editingCartItemId),
     [cart, editingCartItemId]
@@ -128,8 +129,8 @@ export function useCustomerSupport() {
 }
 
 export function useCheckout() {
-  const [totalAmount, _] = useStore.totalAmount();
-  const [__, setCart] = useStore.cart();
+  const [totalAmount, _] = useCartStore.totalAmount();
+  const [__, setCart] = useCartStore.cart();
   return async () => {
     try {
       await purchase({
@@ -148,4 +149,18 @@ export function useCheckout() {
       console.warn(error);
     }
   };
+}
+
+
+export function useSearchResult() {
+  const [products,_] = useProductsStore.products();
+  const [keyword,__] = useProductsStore.keyword();
+  if (keyword === "") {
+    return [];
+  }
+
+  const result = products.filter((product) =>
+    product.name.toLowerCase().includes(keyword.toLowerCase())
+  );
+  return result;
 }

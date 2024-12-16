@@ -1,9 +1,9 @@
 import { useState } from "preact/hooks";
-import { useStore } from "../store";
 import Tabs from "./tabs";
+import { useCategoriesStore } from "../store/categoriesStore";
 
 export default function CategoryTabs() {
-  const [tabs,_] = useStore.tabs();
+  const [tabs,_] = useCategoriesStore.tabs();
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <Tabs

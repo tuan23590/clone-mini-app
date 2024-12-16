@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Carousel from "../../components/carousel";
-import { useStore } from "../../store";
+import { useBannersStore } from "../../store/bannersStore";
 
 export default function Banners() {
-  const [banners,_] = useStore.banners();
+  const [banners,_] = useBannersStore.banners();
   return (
     <Carousel
       slides={banners.map((banner) => (

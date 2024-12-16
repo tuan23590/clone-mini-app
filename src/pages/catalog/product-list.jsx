@@ -1,10 +1,10 @@
 import HorizontalDivider from "../../components/horizontal-divider";
 import ProductGrid from "../../components/product-grid";
-import { useStore } from "../../store";
+import { useProductsStore } from "../../store/productsStore";
 import ProductFilter from "./product-filter";
 
 export default function ProductListPage() {
- const [products,_] =useStore.products();
+ const [products,_] =useProductsStore.products();
   return (
     <>
       <ProductFilter />

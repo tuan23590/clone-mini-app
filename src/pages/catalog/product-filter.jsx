@@ -1,13 +1,13 @@
 import { Suspense } from "preact/compat";
-import { useStore } from "../../store";
 import { Select } from "../../components/lazyloaded";
 import { SelectSkeleton } from "../../components/skeleton";
+import { useSizesAndColorsStore } from "../../store/sizesAndColorsStore";
 
 export default function ProductFilter() {
-  const [initSizes, _] = useStore.initSizes();
-  const [size, setSize] = useStore.size();
-  const [initColors, __] = useStore.initColors();
-  const [color, setColor] = useStore.color();
+  const [initSizes, _] = useSizesAndColorsStore.initSizes();
+  const [size, setSize] = useSizesAndColorsStore.size();
+  const [initColors, __] = useSizesAndColorsStore.initColors();
+  const [color, setColor] = useSizesAndColorsStore.color();
 
   return (
     <div className="flex px-4 py-3 space-x-2 overflow-x-auto">

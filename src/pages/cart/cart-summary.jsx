@@ -1,13 +1,13 @@
 import Button from "../../components/button";
 import { CustomerSupportIcon } from "../../components/vectors";
-import { useStore } from "../../store";
+import { useCartStore } from "../../store/cartStore";
 import { formatPrice } from "../../utils/format";
 import { useCheckout, useCustomerSupport } from "../../utils/hook";
 
 
 export default function CartSummary() {
-  const [totalItems,_] = useStore.totalItems();
-  const [totalAmount,__] = useStore.totalAmount();
+  const [totalItems,_] = useCartStore.totalItems();
+  const [totalAmount,__] = useCartStore.totalAmount();
   const contact = useCustomerSupport();
   const checkout = useCheckout();
 

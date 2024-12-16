@@ -1,10 +1,10 @@
 import Checkbox from "../../components/checkbox";
 import { RemoveIcon } from "../../components/vectors";
-import { useStore } from "../../store";
+import { useCartStore } from "../../store/cartStore";
 
 export default function SelectAll() {
-  const [cart, setCart] = useStore.cart();
-  const [selectedItemIds, setSelectedItemIds] = useStore.selectedItemIds();
+  const [cart, setCart] = useCartStore.cart();
+  const [selectedItemIds, setSelectedItemIds] = useCartStore.selectedItemIds();
   const checkedAll =
     selectedItemIds.length > 0 &&
     !cart.some((item) => !selectedItemIds.includes(item.id));

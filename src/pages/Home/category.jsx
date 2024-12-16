@@ -1,10 +1,10 @@
 import React from 'react'
-import { useStore } from '../../store'
 import Section from '../../components/section';
 import TransitionLink from '../../components/transition-link';
+import { useCategoriesStore } from '../../store/categoriesStore';
 
 export default function Category() {
-    const [categories,_] = useStore.categories();
+    const [categories,_] = useCategoriesStore.categories();
   return (
     <Section title="Danh mục sản phẩm" viewMoreTo="/categories">
       <div className="pt-2.5 pb-4 flex space-x-6 overflow-x-auto px-4">

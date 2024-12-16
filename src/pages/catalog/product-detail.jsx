@@ -1,6 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
 import { useNavigate, useParams } from "react-router-dom";
-import { useStore } from "../../store";
 import { useAddToCart } from "../../utils/hook";
 import { formatPrice } from "../../utils/format";
 import ShareButton from "./share-buttont";
@@ -11,11 +10,12 @@ import RelatedProducts from "./related-products";
 import Button from "../../components/button";
 import toast from "react-hot-toast";
 import styled from "styled-components";
+import { useProductsStore } from "../../store/productsStore";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [products, _] = useStore.products();
+  const [products, _] = useProductsStore.products();
   const product = products.find((p) => p.id === Number(id));
   const [selectedColor, setSelectedColor] = useState();
   const [selectedSize, setSelectedSize] = useState();
@@ -72,7 +72,10 @@ export default function ProductDetailPage() {
               title="Color"
               variants={product.colors}
               value={selectedColor}
-              onChange={(color) => setSelectedColor(color)}
+              onChange={(color) => {
+                console.log("color", color);
+                setSelectedColor(color)
+              }}
               renderVariant={(variant, selected) => (
                 <div
                   className={"w-full h-full rounded-full ".concat(

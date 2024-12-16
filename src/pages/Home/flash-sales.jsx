@@ -1,10 +1,10 @@
 import React from 'react'
 import Section from '../../components/section'
 import ProductGrid from '../../components/product-grid'
-import { useStore } from '../../store'
+import { useProductsStore } from '../../store/productsStore'
 
 export default function FlashSales() {
-    const [products,_] = useStore.products()
+    const [products,_] = useProductsStore.products()
     
   return (
     <Section title="Flash Sales" viewMoreTo="/flash-sales">

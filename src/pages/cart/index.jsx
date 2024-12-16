@@ -1,17 +1,17 @@
 import { useEffect } from "preact/hooks";
 import HorizontalDivider from "../../components/horizontal-divider";
 import { EmptyBoxIcon } from "../../components/vectors";
-import { useStore } from "../../store";
 import ApplyVoucher from "./apply-voucher";
 import CartList from "./cart-list";
 import CartSummary from "./cart-summary";
 import SelectAll from "./select-all";
+import { useCartStore } from "../../store/cartStore";
 
 export default function CartPage() {
-  const [cart, _] = useStore.cart();
-  const [selectedItemIds, __] = useStore.selectedItemIds();
-  const [___, setTotalItems] = useStore.totalItems();
-  const [____, setTotalAmount] = useStore.totalAmount();
+  const [cart, _] = useCartStore.cart();
+  const [selectedItemIds, __] = useCartStore.selectedItemIds();
+  const [___, setTotalItems] = useCartStore.totalItems();
+  const [____, setTotalAmount] = useCartStore.totalAmount();
 
   useEffect(() => {
     const listSelectedItems = cart.filter((item) => selectedItemIds.includes(item.id));

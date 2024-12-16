@@ -1,16 +1,19 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import categoriesData from "./mock/categories.json";
 import productsData from "./mock/products.json";
-import bannersData from "./mock/banners.json";
-import { useStore } from "./store";
+import bannersData from "./mock/banners.json"; 
 import { produce } from "immer";
+import { useCategoriesStore } from "./store/categoriesStore";
+import { useProductsStore } from "./store/productsStore";
+import { useBannersStore } from "./store/bannersStore";
 function App() {
-  const [_, setCategories] = useStore.categories();
-  const [__, setProducts] = useStore.products();
-  const [___, setBanners] = useStore.banners();
-  const [____, setLoading] = useStore.loading();
+  const [_, setCategories] = useCategoriesStore.categories();
+  const [__, setProducts] = useProductsStore.products();
+  const [___, setBanners] = useBannersStore.banners();
+  const [____, setLoading] = useProductsStore.loading();
+  const [______, setRecommendedProducts] = useProductsStore.recommendedProducts();
   useEffect(() => {
     setLoading(true);
     setCategories(categoriesData);
@@ -23,6 +26,7 @@ function App() {
     });
     
     setProducts(listProductsWithCategory);
+    setRecommendedProducts(listProductsWithCategory);
     setBanners(bannersData);
     setLoading(false);
   }, []);

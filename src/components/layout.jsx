@@ -6,10 +6,11 @@ import Footer from "./footer";
 import { Toaster } from "react-hot-toast";
 import { ScrollRestoration } from "./scroll-restoration";
 import { PageSkeleton } from "./skeleton";
-import { useStore } from "../store";
+import { useProductsStore } from "../store/productsStore";
+
 
 export default function Layout() {
-  const [loading, _] = useStore.loading();
+  const [loading, _] = useProductsStore.loading();
   return (
     <Wrapper>
       <Header />

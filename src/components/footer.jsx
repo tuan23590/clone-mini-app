@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { CartIcon, CategoryIcon, HomeIcon, ProfileIcon } from "./vectors";
-import { useStore } from "../store";
 import HorizontalDivider from "./horizontal-divider";
 import TransitionLink from "./transition-link";
+import { useCartStore } from "../store/cartStore";
 
 const NAV_ITEMS = [
   {
@@ -19,7 +19,7 @@ const NAV_ITEMS = [
     name: "Giỏ hàng",
     path: "/cart",
     icon: (props) => {
-      const [cart, _] = useStore.cart();
+      const [cart, _] = useCartStore.cart();
       return (
         <BadgeWrapper>
           {cart.length > 0 && (
