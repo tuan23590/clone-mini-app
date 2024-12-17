@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { purchase } from "zmp-sdk";
 import { useCartStore } from "../store/cartStore";
 import { useProductsStore } from "../store/productsStore";
+import { produce } from "immer";
 
 export function useRouteHandle() {
   const matches = useMatches();
@@ -24,63 +25,57 @@ export function useAddToCart(product, editingCartItemId) {
     editing ? editing.options : getDefaultOptions(product)
   );
 
-  function handleReplace(quantity, cart, editing) {
-    if (quantity === 0) {
-      // the user wants to remove this item.
-      cart.splice(cart.indexOf(editing), 1);
-    } else {
-      const existed = cart.find(
-        (item) =>
-          item.id !== editingCartItemId &&
-          item.product.id === product.id &&
-          isIdentical(item.options, options)
-      );
-      if (existed) {
-        // there's another identical item in the cart; let's remove it and update the quantity in the editing item.
-        cart.splice(cart.indexOf(existed), 1);
-      }
-      cart.splice(cart.indexOf(editing), 1, {
-        ...editing,
-        options,
-        quantity: existed
-          ? existed.quantity + quantity // updating the quantity of the identical item.
-          : quantity,
-      });
-    }
-  }
-
-  function handleAppend(quantity, cart) {
-    const existed = cart.find(
-      (item) =>
-        item.product.id === product.id && isIdentical(item.options, options)
-    );
-    if (existed) {
-      // merging with another identical item in the cart.
-      cart.splice(cart.indexOf(existed), 1, {
-        ...existed,
-        quantity: existed.quantity + quantity,
-      });
-    } else {
-      // this item is new, appending it to the cart.
-      cart.push({
-        id: cart.length + 1,
-        product,
-        options,
-        quantity,
-      });
-    }
-  }
-
   const addToCart = (quantity) => {
-    setCart((cart) => {
-      const res = [...cart];
-      if (editing) {
-        handleReplace(quantity, res, editing);
-      } else {
-        handleAppend(quantity, res);
-      }
-      return res;
-    });
+    setCart((cart) =>
+      produce(cart, (draft) => {
+        if (editing) {
+          // Chỉnh sửa sản phẩm đã tồn tại
+          if (quantity === 0) {
+            // Xóa sản phẩm nếu số lượng = 0
+            const index = draft.findIndex((item) => item.id === editingCartItemId);
+            if (index !== -1) draft.splice(index, 1);
+          } else {
+            const existed = draft.find(
+              (item) =>
+                item.id !== editingCartItemId &&
+                item.product.id === product.id &&
+                isIdentical(item.options, options)
+            );
+            if (existed) {
+              // Xóa sản phẩm trùng lặp và cập nhật số lượng
+              const existedIndex = draft.indexOf(existed);
+              draft.splice(existedIndex, 1);
+              editing.quantity += existed.quantity; // Cộng dồn số lượng
+            }
+            const index = draft.findIndex((item) => item.id === editingCartItemId);
+            if (index !== -1) {
+              draft[index] = {
+                ...editing,
+                options,
+                quantity,
+              };
+            }
+          }
+        } else {
+          // Thêm mới sản phẩm vào giỏ hàng
+          const existed = draft.find(
+            (item) => item.product.id === product.id && isIdentical(item.options, options)
+          );
+          if (existed) {
+            // Cộng dồn số lượng nếu sản phẩm đã tồn tại
+            existed.quantity += quantity;
+          } else {
+            // Thêm sản phẩm mới vào giỏ hàng
+            draft.push({
+              id: draft.length + 1,
+              product,
+              options,
+              quantity,
+            });
+          }
+        }
+      })
+    );
   };
 
   return { addToCart, options, setOptions };
